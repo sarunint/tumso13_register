@@ -38,3 +38,9 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# has_secure_password
+gem 'bcrypt'
+
+# Bootstrap
+gem 'bootstrap-sass'
+
