@@ -44,3 +44,6 @@ gem 'bcrypt'
 # Bootstrap
 gem 'bootstrap-sass'
 
+# Internationalisation
+
+gem 'rails-i18n'
