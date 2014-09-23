@@ -1,0 +1,31 @@
+th:
+  activerecord:
+    models:
+      application: ใบสมัคร
+    attributes:
+      application:
+        email: อีเมล์
+        password: รหัสผ่าน
+        password_confirmation: ยืนยันรหัสผ่าน
+        subject: วิชา
+      school:
+        name: โรงเรียน
+        number: บ้านเลขที่
+        soi: ซอย
+        road: ถนน
+        subdistrict: ตำบล/แขวง
+        district: อำเภอ/เขต
+        province: จังหวัด
+        zip: รหัสไปรษณีย์
+        telephone: โทรศัพท์
+        fax: โทรสาร
+        website: เว็บไซต์
+      subject:
+        name: วิชา
+  helpers:
+    submit:
+      application:
+        create: ลงทะเบียน
+        update: ลงทะเบียน
+      school:
+        create: บันทึกข้อมูลโรงเรียน

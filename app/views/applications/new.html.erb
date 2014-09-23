@@ -1,0 +1,42 @@
+<% content_for(:title, 'สมัครเข้าร่วมการแข่งขัน') %>
+<h3 class="text-center">สมัครเข้าร่วมการแข่งขัน</h3>
+<div class="col-md-6 col-md-offset-3">
+	<%= render 'layouts/errors', models: [@application, @school] %>
+	<%= form_for(@application, html: {class: "form-horizontal"}) do |f| %>
+		<div class="form-group">
+			<%= f.label :email, class: "col-md-3 control-label" %>
+			<div class="col-md-9">
+				<%= f.email_field :email, class: "form-control" %>
+			</div>
+		</div>
+		<%= fields_for(@school) do |s| %>
+			<div class="form-group">
+				<%= s.label :name, class: "col-md-3 control-label" %>
+				<div class="col-md-9">
+					<%= s.text_field :name, class: "form-control" %>
+				</div>
+			</div>
+		<% end %>
+		<div class="form-group">
+			<%= f.label :password, class: "col-md-3 control-label" %>
+			<div class="col-md-9">
+				<%= f.password_field :password, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :password_confirmation, class: "col-md-3 control-label" %>
+			<div class="col-md-9">
+				<%= f.password_field :password_confirmation, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :subject, class: "col-md-3 control-label" %>
+			<div class="col-md-9">
+				<%= f.select :subject_id, @subjects_arr, {}, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.submit class: "btn btn-primary form-control" %>
+		</div>
+	<% end %>
+</div>

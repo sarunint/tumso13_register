@@ -1,0 +1,16 @@
+<% err_count = 0 %>
+<% models.each do |m| %>
+	<% err_count += m.errors.count %>
+<% end %>
+<% if err_count > 0 %>
+	<div class="alert alert-danger">
+		มีข้อผิดพลาด <%= err_count %> จุด ดังต่อไปนี้
+		<ul>
+			<% models.each do |m| %>
+				<% m.errors.full_messages.each do |e| %>
+					<li><%= e %></li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

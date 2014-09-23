@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'about' => 'static_pages#about', as: :about
 
   resource :school
-  resources :applications, only: [:new, :create] do
+  resources :applications, only: [:new, :create, :show, :update] do
     resources :teachers
     resources :teams do
       resources :students
