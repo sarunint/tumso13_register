@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resources :teams do
       resources :students
     end
+    member do
+      get 'confirm/:token' => 'applications#confirm', as: :confirm
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

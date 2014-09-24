@@ -19,5 +19,15 @@ module Tumso13Register
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :th
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'tumso.triamudom.ac.th',
+      user_name:            'tu.tumso@gmail.com',
+      password:             'mathphychembiocom',
+      authentication:       'plain',
+      enable_starttls_auto: true  }
+    config.action_mailer.default_url_options = {host: 'tumso.triamudom.ac.th'}
   end
 end

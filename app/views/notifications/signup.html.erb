@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+	</head>
+	<body style="font-family: arial, helvetica, sans-serif;font-size: 13px;">
+		<span style="font-size: 16px;">ยินดีต้อนรับเข้าสู่การแข่งขันคณิตศาสตร์และวิทยาศาสตร์ระหว่างโรงเรียน ครั้งที่ 13 ประจำปีการศึกษา 2557</span><br/>
+		<br/>
+		เรื่อง การยืนยันการลงทะเบียน<br/>
+		เรียน คุณครู/ผู้สมัคร โรงเรียน<%= @application.school.name %><br/>
+		<br/>
+		เพื่อให้การลงทะเบียนเสร็จสมบูรณ์ กรุณาคลิกที่ลิงค์ดังต่อไปนี้<br/>
+		<br/>
+		<%= link_to confirm_application_url(@application, @application.token), confirm_application_url(@application, @application.token) %><br/>
+		<br/>
+		ด้วยความเคารพ<br/>
+		คณะกรรมการจัดการแข่งขันคณิตศาสตร์และวิทยาศาสตร์ระหว่างโรงเรียน ครั้งที่ 13 ประจำปีการศึกษา 2557<br/>
+		งานกิจกรรมพัฒนาผู้เรียน<br/>
+		โรงเรียนเตรียมอุดมศึกษา<br/>
+		<br/>
+		<span style="font-family: courier new, monospace;">
+			# Application Number <%= @application.id %><br/>
+			# Subject ID <%= @application.subject.id %><br/>
+			# Creation Time <%= @application.created_at %><br/>
+		</span>
+	</body>
+</html>

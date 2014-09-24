@@ -45,5 +45,7 @@ gem 'bcrypt'
 gem 'bootstrap-sass'
 
 # Internationalisation
-
 gem 'rails-i18n'
+
+# Gmail OAuth 2.0
+gem 'action-gmailer'

@@ -55,7 +55,20 @@ class ApplicationsController < ApplicationController
 		@application.status = 1
 		@application.save
 		reset_session
+		Notifications.signup(@application).deliver
 		flash[:success] = "ลงทะเบียนเรียบร้อย ระบบได้ทำการส่งอีเมลไปหาท่าน ซึ่งจะมีลิงค์ยืนยัน กรุณาตรวจสอบอีเมลของท่าน"
+		redirect_to root_path
+	end
+
+	def confirm
+		@application = Application.find_by(id: params[:id], token: params[:token])
+		if @application.nil?
+			flash[:danger] = "เกิดข้อผิดพลาดกับลิงค์ยืนยัน กรุณาลองใหม่ภายหลัง"
+		else
+			@application.status = 2
+			@application.save
+			flash[:success] = "ยืนยันการลงทะเบียนเรียบร้อย กรุณาเข้าสู่ระบบ"
+		end
 		redirect_to root_path
 	end
 

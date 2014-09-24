@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918075551) do
+ActiveRecord::Schema.define(version: 20140923162456) do
 
   create_table "applications", force: true do |t|
     t.datetime "created_at"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140918075551) do
     t.string   "password_digest"
     t.integer  "school_id"
     t.integer  "subject_id"
+    t.string   "token"
   end
 
   add_index "applications", ["school_id"], name: "index_applications_on_school_id"
