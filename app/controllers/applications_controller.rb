@@ -53,6 +53,7 @@ class ApplicationsController < ApplicationController
 		@school = School.find_by(id: session[:school_id])
 		@application.school = @school
 		@application.status = 1
+		@application.revision = 1
 		@application.save
 		reset_session
 		Notifications.signup(@application).deliver
@@ -70,6 +71,9 @@ class ApplicationsController < ApplicationController
 			flash[:success] = "ยืนยันการลงทะเบียนเรียบร้อย กรุณาเข้าสู่ระบบ"
 		end
 		redirect_to root_path
+	end
+
+	def show
 	end
 
 	private

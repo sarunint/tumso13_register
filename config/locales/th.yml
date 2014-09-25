@@ -22,6 +22,10 @@ th:
         website: เว็บไซต์
       subject:
         name: วิชา
+      teacher:
+        title: คำนำหน้าชื่อ
+        fname: ชื่อ
+        lname: นามสกุล
   helpers:
     submit:
       application:
@@ -29,6 +33,10 @@ th:
         update: ลงทะเบียน
       school:
         create: บันทึกข้อมูลโรงเรียน
+      session:
+        create: เข้าสู่ระบบ
+      teacher:
+        create: เพิ่มครูผู้ควบคุม
   notifications:
     signup:
       subject: ยินดีต้อนรับเข้าสู่การแข่งขันคณิตศาสตร์และวิทระหว่างโรงเรียน ครั้งที่ 13

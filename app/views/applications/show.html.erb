@@ -1,0 +1,67 @@
+<% content_for(:title, 'แก้ไขใบสมัคร') %>
+<div class="row text-center">
+	<div class="text-right">
+		ฉบับแก้ไขครั้งที่ <%= current_application.revision %><br/>
+		แก้ไขล่าสุดเมื่อ <%= current_application.updated_at %>
+	</div>
+	<h3>แก้ไขใบสมัคร</h3>
+	<h5>โรงเรียน<%= current_application.school.name %><br/>
+	<%= current_application.school.full_address %><br/>
+	<%= current_application.school.contact_information %><br/>
+	<% if not current_application.school.website.blank? %>
+		<%= link_to current_application.school.website %><br/>
+	<% end %>
+	สาขาวิชา<%= current_application.subject.name %><br/>
+	<b>สถานะ : <%= current_application.status_text %></b></h5>
+</div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<%= render 'checklist' %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div>
+			<span class="h4">รายชื่อครูผู้ควบคุม</span>
+			<% if current_application.teacher_addable? %>
+				<%= link_to '[เพิ่มครู]', new_application_teacher_path %>
+			<% end %>
+		</div>
+		<% if current_application.teachers.any? %>
+			<table class="table table-condensed table-responsive">
+				<tr>
+					<th>
+						ชื่อ-สกุล
+					</th>
+					<th>
+						[ลบ]
+					</th>
+				<tr>
+				<% current_application.teachers.each do |t| %>
+					<tr>
+						<td>
+							<%= t.full_name %>
+						</td>
+						<td>
+							<%= link_to '[ลบ]', application_teacher_path(t), method: :delete %>
+						</td>
+					</tr>
+				<% end %>
+			</table>
+		<% else %>
+			ไม่มีครูผู้ควบคุมทีม
+		<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<h4>ราบชื่อทีมนักเรียนเข้าแข่งขัน</h4>
+		<% if current_application.teams.any? %>
+			<table class="table table-condensed table-responsive">
+				On Implementation
+			</table>
+		<% else %>
+			ไม่มีทีมนักเรียนเข้าแข่งขัน
+		<% end %>
+	</div>
+</div>

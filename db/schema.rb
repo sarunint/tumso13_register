@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923162456) do
+ActiveRecord::Schema.define(version: 20140925043535) do
 
   create_table "applications", force: true do |t|
     t.datetime "created_at"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140923162456) do
     t.integer  "school_id"
     t.integer  "subject_id"
     t.string   "token"
+    t.integer  "revision"
   end
 
   add_index "applications", ["school_id"], name: "index_applications_on_school_id"
@@ -52,6 +53,15 @@ ActiveRecord::Schema.define(version: 20140923162456) do
     t.integer "school_id",  null: false
     t.integer "subject_id", null: false
   end
+
+  create_table "sessions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "remember_token"
+    t.integer  "application_id"
+  end
+
+  add_index "sessions", ["application_id"], name: "index_sessions_on_application_id"
 
   create_table "students", force: true do |t|
     t.datetime "created_at"

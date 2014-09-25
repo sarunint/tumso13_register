@@ -1,0 +1,21 @@
+<% if current_application.finalise.any? %>
+	<div class="alert alert-info">
+		รายการตรวจสอบ
+		<ul>
+			<% current_application.finalise.each do |e| %>
+				<% case e %>
+					<% when :teacher %>
+						<li>ไม่มีครูผู้ควบคุม</li>
+					<% when :team %>
+						<li>ไม่มีทีมนักเรียนเข้าแข่งขัน</li>
+					<% else %>
+						<li>นีทีมนักเรียนเข้าแข่งขัน ที่มีสมาชิกไม่ครบ 2 คน</li>
+					<% end %>
+			<% end %>
+		</ul>
+	</div>
+<% else %>
+	<div class="alert alert-success">
+		ใบสมัครเรียบร้อย
+	</div>
+<% end %>

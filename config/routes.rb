@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'about' => 'static_pages#about', as: :about
 
   resource :school
-  resources :applications, only: [:new, :create, :show, :update] do
+  resource :application, only: [:new, :create, :show, :update] do
     resources :teachers
     resources :teams do
       resources :students
@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       get 'confirm/:token' => 'applications#confirm', as: :confirm
     end
   end
+  get 'signin' => 'sessions#new', as: :new_session
+  post 'signin' => 'sessions#create', as: :sessions
+  delete 'signout' => 'sessions#destroy', as: :destroy_session
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
