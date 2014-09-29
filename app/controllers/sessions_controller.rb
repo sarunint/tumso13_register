@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
 			redirect_to application_path
 		else
 			@application = Application.new
+			@session = Session.new
 		end
 	end
 
