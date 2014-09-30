@@ -36,6 +36,9 @@
 					<th>
 						[ลบ]
 					</th>
+					<th>
+						[แก้ไข]
+					</th>
 				<tr>
 				<% current_application.teachers.each do |t| %>
 					<tr>
@@ -44,6 +47,9 @@
 						</td>
 						<td>
 							<%= link_to '[ลบ]', application_teacher_path(t), method: :delete %>
+						</td>
+						<td>
+							<%= link_to '[แก้ไข]', edit_application_teacher_path(t) %>
 						</td>
 					</tr>
 				<% end %>

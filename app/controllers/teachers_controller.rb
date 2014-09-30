@@ -11,10 +11,34 @@ class TeachersController < ApplicationController
 		@teacher = current_application.teachers.new(teacher_params)
 		if @teacher.valid?
 			@teacher.save
+			app = @teacher.application
+			app.revision += 1
+			app.save
 			redirect_to application_path
 		else
 			render 'new'
 		end
+	end
+
+	def edit
+		@teacher = Teacher.find_by(id: params[:id])
+		if @teacher.application != current_application
+			flash[:danger] = "การกระทำที่น่าสงสัย กรุณาติดต่อผู้พัฒนา"
+			redirect_to application_path
+		end
+	end
+
+	def update
+		teacher = Teacher.find_by(id: params[:id])
+		if teacher.application != current_application
+			flash[:danger] = "การกระทำที่น่าสงสัย กรุณาติดต่อผู้พัฒนา"
+		else
+			teacher.update(teacher_params)
+			app = teacher.application
+			app.revision += 1
+			app.save
+		end
+		redirect_to application_path
 	end
 
 	def destroy
@@ -23,8 +47,11 @@ class TeachersController < ApplicationController
 			flash[:danger] = "การกระทำที่น่าสงสัย กรุณาติดต่อผู้พัฒนา"
 		else
 			teacher.destroy
-			redirect_to application_path
+			app = teacher.application
+			app.revision += 1
+			app.save
 		end
+		redirect_to application_path
 	end
 
 	private
