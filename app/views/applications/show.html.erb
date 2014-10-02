@@ -61,10 +61,49 @@
 </div>
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
-		<h4>ราบชื่อทีมนักเรียนเข้าแข่งขัน</h4>
+		<div>
+			<span class="h4">รายชื่อทีมนักเรียนเข้าแข่งขัน</span>
+			<% if current_application.team_addable? %>
+				<%= link_to '[เพิ่มทีม]', application_teams_path, method: :post %>
+			<% end %>
+		</div>
 		<% if current_application.teams.any? %>
 			<table class="table table-condensed table-responsive">
-				On Implementation
+				<tr>
+					<th>
+						ทีม
+					</th>
+					<th>
+						การดำเนินการ
+					</th>
+				</tr>
+				<% i = 1 %>
+				<% current_application.teams.each do |t| %>
+					<tr>
+						<td>
+							<div>
+								ทีมที่ <%= i %>
+							</div>
+							<% if t.students.any? %>
+								<% t.students.each do |s| %>
+									<div>
+										<%= s.full_name %>
+									</div>
+								<% end %>
+							<% else %>
+								<div>
+									ไม่มีนักเรียน
+								</div>
+							<% end %>
+						</td>
+						<td>
+							<% if t.student_addable? %>
+								<%= link_to '[เพิ่มนักเรียน]', new_application_team_student_path(t) %>
+							<% end %>
+							<%= link_to '[ลบทีม]', application_team_path(t), method: :delete %>
+						</td>
+					</tr>
+				<% end %>
 			</table>
 		<% else %>
 			ไม่มีทีมนักเรียนเข้าแข่งขัน

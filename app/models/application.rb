@@ -41,6 +41,10 @@ class Application < ActiveRecord::Base
 		return self.teachers.count < MAX_TEACHERS
 	end
 
+	def team_addable?
+		return self.teams.count < MAX_TEAMS
+	end
+
 	private
 	def generate_token
 		self.token = SecureRandom.urlsafe_base64
