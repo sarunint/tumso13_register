@@ -26,6 +26,10 @@ th:
         title: คำนำหน้าชื่อ
         fname: ชื่อ
         lname: นามสกุล
+      student:
+        title: คำนำหน้าชื่อ
+        fname: ชื่อ
+        lname: นามสกุล
   helpers:
     submit:
       application:
@@ -38,6 +42,9 @@ th:
       teacher:
         create: เพิ่มครูผู้ควบคุม
         update: บันทึกครูผู้ควบคุม
+      student:
+        create: เพิ่มนักเรียน
+        update: บันทึกนักเรียน
   notifications:
     signup:
       subject: ยินดีต้อนรับเข้าสู่การแข่งขันคณิตศาสตร์และวิทระหว่างโรงเรียน ครั้งที่ 13

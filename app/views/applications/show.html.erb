@@ -87,7 +87,7 @@
 							<% if t.students.any? %>
 								<% t.students.each do |s| %>
 									<div>
-										<%= s.full_name %>
+										<%= s.full_name %> <%= link_to '[แก้ไข]', edit_application_team_student_path(t, s) %> <%= link_to '[ลบ]', application_team_student_path(t, s), method: :delete %>
 									</div>
 								<% end %>
 							<% else %>

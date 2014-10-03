@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
   resource :school
   resource :application, only: [:new, :create, :show, :update] do
-    resources :teachers
-    resources :teams do
-      resources :students
+    resources :teachers, only: [:new, :create, :edit, :update, :destroy]
+    resources :teams, only: [:create, :destroy] do
+      resources :students, only: [:new, :create, :edit, :update, :destroy]
     end
     member do
       get 'confirm/:token' => 'applications#confirm', as: :confirm

@@ -3,7 +3,7 @@ class TeachersController < ApplicationController
 		if not current_application.teacher_addable?
 			redirect_to application_path
 		else
-			@teacher = Teacher.new
+			@teacher = current_application.teachers.new
 		end
 	end
 
@@ -21,17 +21,17 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@teacher = Teacher.find_by(id: params[:id])
-		if @teacher.application != current_application
-			flash[:danger] = "การกระทำที่น่าสงสัย กรุณาติดต่อผู้พัฒนา"
+		@teacher = current_application.teachers.find_by(id: params[:id])
+		if @teacher.nil?
+			flash[:danger] = "ไม่พบครู"
 			redirect_to application_path
 		end
 	end
 
 	def update
-		teacher = Teacher.find_by(id: params[:id])
-		if teacher.application != current_application
-			flash[:danger] = "การกระทำที่น่าสงสัย กรุณาติดต่อผู้พัฒนา"
+		teacher = current_application.teachers.find_by(id: params[:id])
+		if teacher.nil?
+			flash[:danger] = "ไม่พบครู"
 		else
 			teacher.update(teacher_params)
 			app = teacher.application
@@ -42,12 +42,12 @@ class TeachersController < ApplicationController
 	end
 
 	def destroy
-		teacher = Teacher.find_by(id: params[:id])
-		if teacher.application != current_application
-			flash[:danger] = "การกระทำที่น่าสงสัย กรุณาติดต่อผู้พัฒนา"
+		teacher = current_application.teachers.find_by(id: params[:id])
+		if teacher.nil?
+			flash[:danger] = "ไม่พบครู"
 		else
-			teacher.destroy
 			app = teacher.application
+			teacher.destroy
 			app.revision += 1
 			app.save
 		end

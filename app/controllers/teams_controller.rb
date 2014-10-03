@@ -9,9 +9,9 @@ class TeamsController < ApplicationController
 	end
 
 	def destroy
-		team = Team.find_by(id: params[:id])
-		if team.application != current_application
-			flash[:danger] = "การกระทำที่น่าสงสัย กรุณาติดต่อผู้พัฒนา"
+		team = current_application.teams.find_by(id: params[:id])
+		if team.nil?
+			flash[:danger] = "ไม่พบทีม"
 		else
 			team.destroy
 			app = team.application
