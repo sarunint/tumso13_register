@@ -16,7 +16,7 @@ class School < ActiveRecord::Base
 	def full_address
 		res = []
 		res << number
-		if not soi.blank? and soi != '-'
+		if not soi.blank? and soi.strip != '-'
 			res << "ซอย#{soi}"
 		end
 		res << "ถนน#{road}"
@@ -35,7 +35,7 @@ class School < ActiveRecord::Base
 	def contact_information
 		res = []
 		res << "โทรศัพท์ #{telephone}"
-		if not fax.blank? and fax != '-'
+		if not fax.blank? and fax.strip != '-'
 			res << "โทรสาร #{fax}"
 		end
 		res.join " "

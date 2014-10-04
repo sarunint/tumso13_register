@@ -49,3 +49,7 @@ gem 'rails-i18n'
 
 # Gmail OAuth 2.0
 gem 'action-gmailer'
+
+# LaTeX
+
+gem 'rails-latex'

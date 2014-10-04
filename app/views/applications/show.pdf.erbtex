@@ -1,0 +1,88 @@
+<% @latex_config = {command: 'xelatex', arguments: ['-halt-on-error'], parse_runs: 1} %>
+\documentclass{article}
+\usepackage{polyglossia}
+\usepackage{layout}
+\usepackage{setspace}
+\XeTeXlinebreaklocale "th_TH"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\setmainfont[
+	Path = <%= Rails.root.join('app', 'assets', 'fonts') %>/,
+	Extension = .ttf,
+	BoldFont = * Bold,
+	ItalicFont = * Italic,
+	BoldItalicFont = * BoldItalic
+]{THSarabunNew}
+\usepackage{anyfontsize}
+\usepackage{setspace}
+\usepackage[left=1in, right=1in, top=0.75in, bottom=0.75in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\graphicspath{ {<%= Rails.root.join('app', 'assets', 'images') %>/} }
+\DeclareGraphicsExtensions{.pdf, .png, .jpg}
+\fancypagestyle{tumsohdr}
+{
+	\fancyhf{}
+	\rhead{\fontsize{16}{18}\selectfont รหัสใบสมัคร <%= current_application.id %>\\ฉบับแก้ไขครั้งที่ <%= current_application.revision %>}
+	<% if current_application.finalise.any? %>
+		\lhead{\fontsize{16}{18}\selectfont ใบสมัครฉบับนี้ไม่สมบูรณ์}
+	<% end %>
+	\cfoot{}
+	\lfoot{การแข่งขันคณิตศาสตร์และวิทยาศาสตร์ระหว่างโรงเรียน ครั้งที่ 13}
+	\rfoot{ใบสมัครโรงเรียน<%= current_application.school.name %> สาขาวิชา<%= current_application.subject.name %>}
+}
+\begin{document}
+	\pagestyle{tumsohdr}
+	\newgeometry{left=1in, right=1in, top=0.75in, bottom=0.75in}
+	\begin{center}
+		\includegraphics[scale=0.04]{tumso}\\
+		\fontsize{18}{18}\selectfont
+		\textbf{ใบสมัคร}\\
+		\fontsize{16}{18}\selectfont
+		\textbf{การแข่งขันคณิตศาสตร์และวิทยาศาสตร์ระหว่างโรงเรียน ครั้งที่ 13}\\
+		\textbf{(13th Triam Udom Mathematics and Science Olympiad)}
+		\rule{\textwidth}{1pt}
+	\end{center}
+	\fontsize{16}{18}\selectfont
+	\textbf{ส่วนที่ 1 : ข้อมูลโรงเรียน}\\
+	โรงเรียน<%= current_application.school.name %>\\
+	ที่อยู่ <%= current_application.school.full_address %>\\
+	โทรศัพท์ <%= current_application.school.telephone %>\\
+	<% if current_application.school.fax.strip != '-' and (not current_application.school.fax.blank?) %>
+		โทรสาร <%= current_application.school.fax %>\\
+	<% end %>
+	<% if current_application.school.website.strip != '-' and (not current_application.school.website.blank?) %>
+		เว็บไซต์ <%= current_application.school.website %>\\
+	<% end %>
+	\\
+	\textbf{ส่วนที่ 2 : ข้อมูลครูผู้ควบคุม}\\
+	จำนวนครูผู้ควบคุมทั้งสิ้น <%= current_application.teachers.count %> คน ดังต่อไปนี้\\
+	<% current_application.teachers.each do |t| %>
+		\indent <%= t.full_name %>\\
+	<% end %>
+	\\
+	\textbf{ส่วนที่ 3 : ข้อมูลนักเรียนเข้าแข่งขัน}\\
+	จำนวนทีมที่เข้าแข่งขันในสาขาวิชา\textbf{<%= current_application.subject.name %>} จำนวน <%= current_application.teams.count %> ทีม ดังต่อไปนี้\\
+	<% i = 1 %>
+	<% current_application.teams.each do |t| %>
+		ทีมที่ <%= i %>\\
+		<% t.students.each do |s| %>
+			\indent <%= s.full_name %>\\
+		<% end %>
+		<% i += 1 %>
+	<% end %>
+	\\
+	\textbf{ส่วนที่ 4 : คำรับรองของสถานศึกษา}\\
+	\indent ขอรับรองว่านักเรียนที่สมัครเข้าร่วมการแข่งขัน มีคุณสมบัติตามระเบียบการแข่งขัน และได้รับทราบระเบียบการแข่งขัน พร้อมทั้งยินยอมปฏิบัติตามระเบียบการแข่งขันทุกประการ และขอรับรองว่า นักเรียนที่สมัครเข้าแข่งขัน และครูผู้ควบคุมนักเรียน เป็นนักเรียน และครูของโรงเรียน<%= current_application.school.name %> จริง\\ \\ \\
+	\begin{tabular}{p{3in}c}
+		& ...................................................................\\
+		& (.................................................................)\\
+		& หัวหน้าสถานศึกษา/หัวหน้ากลุ่มสาระการเรียนรู้
+	\end{tabular}
+	\newpage
+	\newgeometry{left=1in, right=1in, top=0.75in, bottom=0.75in}
+	{\noindent\fontsize{24}{28}\selectfont\textbf{คำแนะนำในการสมัคร (ไม่ต้องส่งเอกสารหน้านี้มา)}}\\
+	หลังจากพิมพ์เอกสารฉบับนี้แล้ว ให้ปฏิบัติดังต่อไปนี้\\
+	1. นำใบสมัครฉบับนี้ ให้หัวหน้าสถานศึกษา หรือหัวหน้ากลุ่มสาระการเรียนรู้ที่เกี่ยวข้องลงลายมือชื่อรับรอง\\
+	2. สแกนใบสมัครฉบับนี้ แล้วส่งอีเมล์ไปที่ tu.tumso@gmail.com โดยตั้งชื่อหัวข้อว่า ``ใบสมัครการแข่งขัน TUMSO ครั้งที่ 13 โรงเรียน<%= current_application.school.name%>'' หรือส่งแฟกซ์มายังหมายเลข 0-2255-8283, 0-2252-7002\\
+	3. หลังจากสถานะในเว็บไซต์เปลี่ยนเป็น ``ได้รับเอกสารเรียบร้อยแล้ว'' ถือว่าเสร็จสิ้นการสมัคร
+\end{document}
