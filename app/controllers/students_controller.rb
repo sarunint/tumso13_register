@@ -1,4 +1,6 @@
 class StudentsController < ApplicationController
+	before_action :application_required
+
 	def new
 		team = current_application.teams.find_by(id: params[:team_id])
 		if team.nil?

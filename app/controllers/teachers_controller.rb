@@ -1,4 +1,6 @@
 class TeachersController < ApplicationController
+	before_action :application_required
+
 	def new
 		if not current_application.teacher_addable?
 			redirect_to application_path

@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+	before_action :application_required
+
 	def create
 		team = current_application.teams.new
 		team.save

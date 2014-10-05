@@ -1,4 +1,6 @@
 class ApplicationsController < ApplicationController
+	before_action :application_required, only: [:show]
+
 	def new
 		reset_session
 		@application = Application.new

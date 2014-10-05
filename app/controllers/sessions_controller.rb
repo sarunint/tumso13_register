@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+	before_action :application_required, only: [:destroy]
+
 	def new
 		if current_application
 			flash[:info] = 'คุณอยู่ในระบบเรียบร้อยแล้ว'
